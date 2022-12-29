@@ -1,7 +1,5 @@
-import sys
 import sqlite3
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
 
 
 # 리뷰 페이지 클래스
