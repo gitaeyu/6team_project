@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1118</width>
+    <height>787</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="kwangju_label">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>50</y>
+     <width>891</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:48pt;&quot;&gt;광주광역시 음식점 조회&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="gu_comboBox">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>220</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <item>
+    <property name="text">
+     <string>광산구</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>동구</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>서구</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>남구</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>북구</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="big_comboBox">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>220</y>
+     <width>181</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 14pt &quot;Arial&quot;;</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>상권업종대분류명</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>부동산</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>숙박</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>음식</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>학문/교육</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>소매</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>생활서비스</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>스포츠</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>관광/여가/오락</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="searching_btn">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>220</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 14pt &quot;Arial&quot;;</string>
+   </property>
+   <property name="text">
+    <string>검색</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="middle_comboBox">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>220</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 14pt &quot;Arial&quot;;</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="store_table">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>300</y>
+     <width>821</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>상가업소번호</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>상호명</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>지점명</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>상권업종대분류명</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>상권업종중분류명</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>상권업종소분류코드</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>상권업종소분류명</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>시군구명</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>행정동명</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>도로명주소</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>신우편번호</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="cancel_btn">
+   <property name="geometry">
+    <rect>
+     <x>940</x>
+     <y>60</y>
+     <width>121</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>cancel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
