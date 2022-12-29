@@ -15,8 +15,8 @@ class MyApp(QtWidgets.QDialog):
 
         content = sqlite3.connect("Shop2.db", isolation_level=None)
         self.point = content.cursor()
-        self.codeData = pd.read_csv('분류코드표.csv', encoding='cp949')
-        self.codeData = pd.DataFrame(self.codeData)
+        # self.codeData = pd.read_csv('분류코드표.csv', encoding='cp949')
+        # self.codeData = pd.DataFrame(self.codeData)
 
         self.Page_login = Login()
         self.bt_loginout.clicked.connect(self.login_select)
@@ -40,7 +40,7 @@ class MyApp(QtWidgets.QDialog):
     def search_comboadd(self):
         self.cb_select_d_code2.clear()
         self.cb_select_d_code2.addItem('중분류')
-        addlist=self.codeData[['중분류코드','중분류명']].drop_duplicates()           #중복제거
+        # addlist=self.codeData[['중분류코드','중분류명']].drop_duplicates()           #중복제거
         temp = addlist[addlist['중분류코드'].str.contains(str(self.cb_select_d_code1.currentText()[0]))]
         print(len(temp['중분류코드']))
         for i,j in zip(temp['중분류코드'],temp['중분류명']):
