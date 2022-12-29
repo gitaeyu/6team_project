@@ -57,20 +57,20 @@ class ReviewPage(QWidget):
 
         # 식당 점수 평균 구함
         self.review_score = self.score_calc(ui_length)
+        # 별점 라벨(김연수 아이디어 추가)
+        self.review_score_label = QLabel('★★★★★', self)
+        self.review_score_label.setGeometry(25, 130, int(self.review_score * 12), 20)
+
+        # self.i값에 받아 반복에 사용
+        for self.i in range(ui_length):
+            # 리뷰 뷰어 실행
+            self.review_viewer_ui()
+        # 리뷰 작성 ui 출력
+        self.review_write_ui()
 
         # 지점명이 있을 경우 지점명 더함
         if not self.save_review:
-            # 별점 라벨(김연수 아이디어 추가)
-            self.review_score_label = QLabel('★★★★★', self)
-            self.review_score_label.setGeometry(25, 130, int(self.review_score * 12), 20)
-
-            # self.i값에 받아 반복에 사용
-            for self.i in range(ui_length):
-                # 리뷰 뷰어 실행
-                self.review_viewer_ui()
-            # 리뷰 작성 ui 출력
-            self.review_write_ui()
-
+            pass
         else:
             if self.save_review[0][3]:
                 self.restaurant_name_label = QLabel(f'{self.save_review[0][2]}{self.save_review[0][3]}'
