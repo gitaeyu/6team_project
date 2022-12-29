@@ -40,10 +40,10 @@ class Kwangju_Restaurant(QWidget,form_kwangju):
         if self.Signal_login == False:
             QMessageBox.critical(self, "", "로그인 후 이용해주세요")
             return
-        self.review = ReviewPage()
         self.selectrow = self.store_table.currentIndex().row()
+        self.review = ReviewPage([self.INFO_user, self.data_list[self.selectrow][0]])
         # print(self.data_list[self.selectrow])
-        self.review.user_restaurant_info = [self.INFO_user, self.data_list[self.selectrow][0]]
+        # self.review.user_restaurant_info = [self.INFO_user, self.data_list[self.selectrow][0]]
         # print(self.review.user_restaurant_info)
         print(self.review.user_restaurant_info[0][0][1])
         print(self.review.user_restaurant_info[1],"asdasd")
