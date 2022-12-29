@@ -26,25 +26,9 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="page">
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>375</x>
-       <y>226</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 10pt &quot;GyeonggiBatang&quot;;</string>
-     </property>
-     <property name="text">
-      <string>비밀번호 찾기</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="signup_Button">
      <property name="geometry">
       <rect>
@@ -74,22 +58,6 @@
      </property>
      <property name="text">
       <string>회원가입</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="sh_label_4">
-     <property name="geometry">
-      <rect>
-       <x>295</x>
-       <y>224</y>
-       <width>71</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 10pt &quot;GyeonggiBatang&quot;;</string>
-     </property>
-     <property name="text">
-      <string>아이디 찾기</string>
      </property>
     </widget>
     <widget class="QPushButton" name="login_Button">
@@ -220,16 +188,50 @@
       <string>HOME</string>
      </property>
     </widget>
-    <zorder>signup_Button</zorder>
-    <zorder>sh_label_4</zorder>
-    <zorder>login_Button</zorder>
-    <zorder>login_id_lineEdit</zorder>
-    <zorder>login_pw_lineEdit</zorder>
-    <zorder>sh_label_3</zorder>
-    <zorder>sh_label_2</zorder>
-    <zorder>sh_label</zorder>
-    <zorder>Home1_Button</zorder>
-    <zorder>label_5</zorder>
+    <widget class="QPushButton" name="idFind_Button">
+     <property name="geometry">
+      <rect>
+       <x>247</x>
+       <y>230</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+	font: 9pt &quot;GyeonggiBatang&quot;;
+	color: rgb(251, 86, 7);
+	background-color: white;
+	border: 2px solid rgb(251, 86, 7);
+	border-radius: 5px;
+}</string>
+     </property>
+     <property name="text">
+      <string>아이디 찾기</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pwFind_Button">
+     <property name="geometry">
+      <rect>
+       <x>357</x>
+       <y>230</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+	font: 9pt &quot;GyeonggiBatang&quot;;
+	color: rgb(251, 86, 7);
+	background-color: white;
+	border: 2px solid rgb(251, 86, 7);
+	border-radius: 5px;
+}</string>
+     </property>
+     <property name="text">
+      <string>비밀번호 찾기</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="page_3">
     <widget class="QLabel" name="sh_label_7">
@@ -592,7 +594,7 @@
     </widget>
    </widget>
    <widget class="QWidget" name="page_2">
-    <widget class="QLineEdit" name="name_lineEdit_2">
+    <widget class="QLineEdit" name="lE_findName">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -634,7 +636,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;이름&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="phone_lineEdit_2">
+    <widget class="QLineEdit" name="lE_findPhone">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -679,7 +681,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;아이디 찾기&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="Home2_Button_2">
+    <widget class="QPushButton" name="IDfind_Execute">
      <property name="geometry">
       <rect>
        <x>220</x>
@@ -701,7 +703,7 @@
       <string>찾기</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="Home2_Button_3">
+    <widget class="QPushButton" name="Home3_Button">
      <property name="geometry">
       <rect>
        <x>220</x>
@@ -723,7 +725,7 @@
       <string>로그인창으로</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="DisplayID">
      <property name="geometry">
       <rect>
        <x>110</x>
@@ -755,7 +757,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;비밀번호 찾기&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="name_lineEdit_3">
+    <widget class="QLineEdit" name="lE_findID">
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -765,7 +767,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="Home2_Button_4">
+    <widget class="QPushButton" name="Home4_Button">
      <property name="geometry">
       <rect>
        <x>230</x>
@@ -787,7 +789,7 @@
       <string>로그인창으로</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="DisplayPW">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -804,7 +806,7 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>110</y>
+       <y>104</y>
        <width>65</width>
        <height>17</height>
       </rect>
@@ -816,10 +818,10 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;아이디&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="Question_2">
+    <widget class="QComboBox" name="CB_findQuestion">
      <property name="geometry">
       <rect>
-       <x>203</x>
+       <x>202</x>
        <y>144</y>
        <width>241</width>
        <height>41</height>
@@ -881,10 +883,10 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;비밀번호 찾기 질문&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="answer_lineEdit_2">
+    <widget class="QLineEdit" name="lE_findAnswer">
      <property name="geometry">
       <rect>
-       <x>203</x>
+       <x>202</x>
        <y>194</y>
        <width>241</width>
        <height>41</height>
@@ -916,7 +918,7 @@
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;답변&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="Home2_Button_5">
+    <widget class="QPushButton" name="PWfind_Execute">
      <property name="geometry">
       <rect>
        <x>230</x>
