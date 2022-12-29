@@ -36,6 +36,7 @@ class ReviewPage(QWidget):
         self.return_button.setGeometry(700, 560, 80, 20)
         self.return_button.clicked.connect(self.close_app)
 
+    # 닫기
     def close_app(self):
         self.close()
 
