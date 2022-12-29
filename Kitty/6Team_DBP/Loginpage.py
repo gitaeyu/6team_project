@@ -14,6 +14,7 @@ class Login(QWidget, form_class):
     def __init__(self):
         super().__init__()
         self.Signal_login = False
+        self.INFO_login = []
         conn = sqlite3.connect("MemberInfo.db", isolation_level=None)
         # 커서 획득
         c = conn.cursor()
@@ -164,9 +165,9 @@ class Login(QWidget, form_class):
 
 
 
-        if self.id not in self. INFO_login[1]:
+        if self.id not in self. INFO_login[0]:
             logined = 1
-        elif pw not in self. INFO_login[2]:
+        elif pw not in self. INFO_login[0]:
             logined = 2
         else:
             logined = 3
@@ -179,6 +180,7 @@ class Login(QWidget, form_class):
             QMessageBox.critical(self, "로그인 오류", "비밀번호를 입력하세요")
         else:
             self.Signal_login = True
+            self.close()
             return True    # 로그인 성공
 
 

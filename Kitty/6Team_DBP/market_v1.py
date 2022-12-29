@@ -4,7 +4,8 @@ from PyQt5 import QtWidgets
 from PyQt5 import uic
 import sys
 
-from Login import Login
+from Loginpage import Login
+from search_res import Kwangju_Restaurant
 
 class MyApp(QtWidgets.QDialog):
     def __init__(self):
@@ -12,7 +13,7 @@ class MyApp(QtWidgets.QDialog):
         self.ui = uic.loadUi("maintest.ui", self)
         self.ui.show()
 
-        content = sqlite3.connect("SHOP_DB.db", isolation_level=None)
+        content = sqlite3.connect("Shop2.db", isolation_level=None)
         self.point = content.cursor()
         self.codeData = pd.read_csv('분류코드표.csv', encoding='cp949')
         self.codeData = pd.DataFrame(self.codeData)
@@ -21,8 +22,14 @@ class MyApp(QtWidgets.QDialog):
         self.bt_loginout.clicked.connect(self.login_select)
         self.Page_login.login_Button.clicked.connect(self.update)
         self.bt_d_select.stateChanged.connect(self.move_detail_search)
+        self.bt_search.clicked.connect(self.go_search_res)
 
         self.cb_select_d_code1.currentTextChanged.connect(self.search_comboadd)
+    def go_search_res(self):
+        self.restourant = Kwangju_Restaurant()
+        self.restourant.INFO_user = self.Page_login.INFO_login
+        self.restourant.Signal_login = self.Page_login.Signal_login
+        self.restourant.show()
 
     def move_detail_search(self):
         if self.bt_d_select.isChecked() == True:

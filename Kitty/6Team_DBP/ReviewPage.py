@@ -9,7 +9,6 @@ class ReviewPage(QWidget):
 
     def __init__(self, info):
         super().__init__()
-        # 외부에서 받아올 유저, 레스토랑 정보[유저 id, 레스토랑 상가업소번호]
         # 리뷰 평점
         self.review_score = 0
         # 메인에서 받아올 유저와 식당 정보
@@ -60,7 +59,7 @@ class ReviewPage(QWidget):
 
         # 식당 점수를 review_score 함수에 입력
         self.review_score = self.score_calc(ui_length)
-        
+
         # 별점 라벨(김연수 아이디어 추가)
         self.review_score_label = QLabel('★★★★★', self)
         # 별을 평점에 맞게 잘라서 출력함
@@ -162,9 +161,9 @@ class ReviewPage(QWidget):
                 restaurant_branch = c.fetchone()[0]
                 # 지점명 유무에 따른 등록 db 차이
                 if not restaurant_branch:
-                    c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
+                    c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0][0][1]}", "{restaurant_name}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
                 else:
-                    c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 지점명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", "{restaurant_branch}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
+                    c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 지점명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0][0][1]}", "{restaurant_name}", "{restaurant_branch}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
                 # 리뷰 등록 완료
                 QMessageBox.information(self, '리뷰 등록', '리뷰가 등록되었습니다.')
                 self.close()
