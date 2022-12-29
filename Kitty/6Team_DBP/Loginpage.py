@@ -17,7 +17,8 @@ class Login(QWidget, form_class):
         conn = sqlite3.connect("MemberInfo.db", isolation_level=None)
         # 커서 획득
         c = conn.cursor()
-        c.execute("CREATE TABLE IF NOT EXISTS MEMBERINFO (NAME TEXT, ID TEXT, PASSWORD TEXT,PHONE TEXT, ADDRESS TEXT)")
+        c.execute("CREATE TABLE IF NOT EXISTS MEMBERINFO (NAME TEXT, ID TEXT, PASSWORD TEXT,PHONE TEXT, ADDRESS TEXT\
+                    QUESTION TEXT, ANSWER TEXT)")
         c.close()
         self.checkStatus = False        # 회원가입페이지-중복확인 시 필요
         self.setupUi(self)
@@ -27,8 +28,14 @@ class Login(QWidget, form_class):
         self.signup_Button.clicked.connect(self.MoveSignupPage)     # 로그인페이지-회원가입버튼
         self.Home1_Button.clicked.connect(self.MoveMainPage)        # 로그인페이지-홈버튼
         self.Home2_Button.clicked.connect(self.MoveMainPage)        # 회원가입페이지-홈버튼
+        self.Home3_Button.clicked.connect(self.MoveMainPage)        # 회원가입페이지-홈버튼
+        self.Home4_Button.clicked.connect(self.MoveMainPage)        # 회원가입페이지-홈버튼
         self.join_Button.clicked.connect(self.Sign_Up)              # 회원가입페이지-가입하기버튼
         self.duplication_Button.clicked.connect(self.Double_Check)  # 회원가입페이지-중복확인버튼
+        self.idFind_Button.clicked.connect(self.MovefindIDPage)
+        self.pwFind_Button.clicked.connect(self.MovefindPWPage)
+        self.IDfind_Execute.clicked.connect(self.findID)
+        self.PWfind_Execute.clicked.connect(self.findPW)
         # 숫자만 입력 받게하기 위해 추가
         self.onlyInt = QIntValidator()
         self.phone_lineEdit.setValidator(self.onlyInt)      # self. 다음에 적용할 lineEdit 객체명으로 변경
@@ -37,8 +44,10 @@ class Login(QWidget, form_class):
 
     def MoveMainPage(self):     # 메인페이지로 이동하는 함수
         self.login_SW.setCurrentIndex(0)
-
-
+    def MovefindIDPage(self):     # 메인페이지로 이동하는 함수
+        self.login_SW.setCurrentIndex(2)
+    def MovefindPWPage(self):     # 메인페이지로 이동하는 함수
+        self.login_SW.setCurrentIndex(3)
     def MoveSignupPage(self):       # 회원가입 페이지로 이동하는 함수
         self.login_SW.setCurrentIndex(1)
         self.id_lineEdit.clear()
@@ -50,12 +59,45 @@ class Login(QWidget, form_class):
         self.answer_lineEdit.clear()
 
 
+    # 아이디 찾기
+    def findID(self):
+        Name = self.lE_findName.text()
+        Phonenumber = self.lE_findPhone.text()
+        conn = sqlite3.connect("MemberInfo.db", isolation_level=None)
+        # 커서 획득
+        c = conn.cursor()
+        c.execute(f"SELECT * FROM MEMBERINFO WHERE NAME = '{Name}' AND  PHONE = '{Phonenumber}'")
+        memberinfo = c.fetchall()
+        c.close()
+        if memberinfo == []:
+            self.DisplayID.setText(f"일치하는 회원 정보가 없습니다")
+        else:
+            self.DisplayID.setText(f"아이디는 {memberinfo[0][1]}입니다")
+        self.lE_findName.clear()
+        self.lE_findPhone.clear()
 
+    #비밀번호 찾기
+    def findPW(self):
+        ID = self.lE_findID.text()
+        Question = self.CB_findQuestion.currentText()
+        Answer = self.lE_findAnswer.text()
+        conn = sqlite3.connect("MemberInfo.db", isolation_level=None)
+        # 커서 획득
+        c = conn.cursor()
+        c.execute(f"SELECT * FROM MEMBERINFO WHERE ID = '{ID}' AND  QUESTION = '{Question}' \
+                    AND  ANSWER = '{Answer}'")
+        CheckPW = c.fetchall()
+        print(CheckPW)
+        c.close()
+        if CheckPW == []:
+            self.DisplayPW.setText(f"일치하는 회원 정보가 없습니다")
+        else:
+            self.DisplayPW.setText(f"비밀번호는 {CheckPW[0][2]}입니다")
+        self.lE_findID.clear()
+        self.lE_findAnswer.clear()
     # 회원가입 함수
     def Double_Check(self):         # 회원가입 페이지-중복 확인하는 함수
         user = self.id_lineEdit.text()  # id_lineEdit에 입력되는 텍스트
-        dc = 0  # 임의로 지정한 변수
-
         conn = sqlite3.connect("MemberInfo.db", isolation_level=None)
         # 커서 획득
         c = conn.cursor()
@@ -63,19 +105,12 @@ class Login(QWidget, form_class):
         memberlist = c.fetchall()
         c.close()
         if memberlist == [] :
-            dc = 1
+            QMessageBox.information(self, "알림", "사용 가능한 아이디")
             self.checkStatus = True
         else :
-            dc = 2
-        if dc == 1:
-            QMessageBox.information(self, "알림", "사용 가능한 아이디")
-        elif dc == 2:
             QMessageBox.critical(self, "알림", "아이디 중복")
-
-
     def Double_change(self):
         self.checkStatus = False
-
 
     def Sign_Up(self):
         id = self.id_lineEdit.text()        # lineEdit에 입력받은 데이터
@@ -84,8 +119,9 @@ class Login(QWidget, form_class):
         name = self.name_lineEdit.text()
         phone = self.phone_lineEdit.text()
         address = self.address_lineEdit.text()
+        question = self.Question.currentText()
         answer = self.answer_lineEdit.text()
-        user = (name, id, pw1, phone, address)      # 정보 저장 순서
+        user = (name, id, pw1, phone, address,question,answer)      # 정보 저장 순서
         conn = sqlite3.connect("MemberInfo.db", isolation_level=None)
         c = conn.cursor()
         # 회원가입 시 필요한 조건
@@ -96,7 +132,8 @@ class Login(QWidget, form_class):
         elif id == '' or pw1 == '' or name == '' or phone == '' or address == '':
             QMessageBox.critical(self, "알림", "정보를 입력하세요")
         else:
-            c.execute(f'INSERT INTO MEMBERINFO(NAME,ID,PASSWORD,PHONE,ADDRESS) VALUES (?,?,?,?,?)', user)
+            c.execute(f'INSERT INTO MEMBERINFO(NAME,ID,PASSWORD,PHONE,ADDRESS,QUESTION,ANSWER) \
+                        VALUES (?,?,?,?,?,?,?)', user)
             c.close()
             QMessageBox.information(self, "알림", "회원가입 됐습니다")
             self.login_SW.setCurrentIndex(1)
@@ -107,6 +144,7 @@ class Login(QWidget, form_class):
             self.name_lineEdit.clear()
             self.phone_lineEdit.clear()
             self.address_lineEdit.clear()
+            self.answer_lineEdit.clear()
 
     # 로그인
     def Login_Check (self):
@@ -142,6 +180,8 @@ class Login(QWidget, form_class):
         else:
             self.Signal_login = True
             return True    # 로그인 성공
+
+
 
 
 
