@@ -29,7 +29,7 @@
   <widget class="QComboBox" name="gu_comboBox">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>80</x>
      <y>220</y>
      <width>111</width>
      <height>31</height>
@@ -70,7 +70,7 @@
   <widget class="QComboBox" name="big_comboBox">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>210</x>
      <y>220</y>
      <width>181</width>
      <height>31</height>
@@ -128,7 +128,7 @@
   <widget class="QPushButton" name="searching_btn">
    <property name="geometry">
     <rect>
-     <x>830</x>
+     <x>860</x>
      <y>220</y>
      <width>131</width>
      <height>31</height>
@@ -144,7 +144,7 @@
   <widget class="QComboBox" name="middle_comboBox">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>410</x>
      <y>220</y>
      <width>211</width>
      <height>31</height>
@@ -218,6 +218,11 @@
      <string>신우편번호</string>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>평점</string>
+    </property>
+   </column>
   </widget>
   <widget class="QPushButton" name="cancel_btn">
    <property name="geometry">
@@ -230,6 +235,22 @@
    </property>
    <property name="text">
     <string>cancel</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="searching_lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>220</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
