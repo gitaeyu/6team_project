@@ -155,18 +155,14 @@ class Login(QWidget, form_class):
         self.id = self.login_id_lineEdit.text() # 원래는 id엿지만 메인페이지에서 id의 정보를 불러오기 위해 self.을 붙여줬다 (기태)
         pw = self.login_pw_lineEdit.text()
         logined = 0
-        print("self.id")
         conn = sqlite3.connect("MemberInfo.db", isolation_level=None)
         c = conn.cursor()
-        print("pw")
-        c.execute(f"SELECT * FROM MEMBERINFO WHERE ID = '{self.id}' AND PASSWORD = '{pw}'")
+        c.execute(f"SELECT * FROM MEMBERINFO WHERE ID = '{self.id}'")
         self. INFO_login = c.fetchall()
 
-
-
-        if self.id not in self. INFO_login[1]:
+        if self.id not in self. INFO_login[0][1]:
             logined = 1
-        elif pw not in self. INFO_login[2]:
+        elif pw not in self. INFO_login[0][2]:
             logined = 2
         else:
             logined = 3
@@ -180,10 +176,6 @@ class Login(QWidget, form_class):
         else:
             self.Signal_login = True
             return True    # 로그인 성공
-
-
-
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
