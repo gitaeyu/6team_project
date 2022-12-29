@@ -1,7 +1,7 @@
 import sys
 import sqlite3
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 
 # 리뷰 페이지 클래스
@@ -79,9 +79,9 @@ class ReviewPage(QWidget):
         else:
             if self.save_review[0][3]:
                 self.restaurant_name_label = QLabel(f'{self.save_review[0][2]}{self.save_review[0][3]}'
-                                                    f'({self.review_score} / 5) 유저리뷰', self)
+                                                    f'({self.review_score:.1f} / 5) 유저리뷰', self)
             else:
-                self.restaurant_name_label = QLabel(f'{self.save_review[0][2]}({self.review_score}'
+                self.restaurant_name_label = QLabel(f'{self.save_review[0][2]}({self.review_score:.1f}'
                                                     f' / 5) 유저리뷰', self)
             self.restaurant_name_label.setGeometry(100, 130, 300, 20)
 
@@ -98,7 +98,7 @@ class ReviewPage(QWidget):
     # 리뷰 뷰어?
     def review_viewer_ui(self):
         # 라벨을 통한 유저 아이디 출력
-        self.user_label = QLabel(f'{self.save_review[self.i][1]} 님의 리뷰', self)
+        self.user_label = QLabel(f'{self.save_review[self.i][1]} 님', self)
         self.user_label.setGeometry(700, (self.i + 1) * 70 + 90, 100, 20)
 
         # 라벨을 통한 평점 출력
@@ -112,10 +112,12 @@ class ReviewPage(QWidget):
 
     # 리뷰 입력 ui
     def review_write_ui(self):
+        # 등록 버튼
         self.post_review_button = QPushButton('등록', self)
         self.post_review_button.setGeometry(680, 60, 100, 20)
-        # self.post_review_button.clicked.connect(self.upload_review)
+        self.post_review_button.clicked.connect(self.upload_review)
 
+        # 콤보박스
         self.score_combobox = QComboBox(self)
         self.score_combobox.addItem('별점 선택', 5)
         self.score_combobox.addItem('★★★★★', 5)
@@ -125,36 +127,26 @@ class ReviewPage(QWidget):
         self.score_combobox.addItem('★', 1)
         self.score_combobox.setGeometry(680, 90, 100, 20)
 
+        # 평가용 textedit
         self.review_write_text = QTextEdit('', self)
         self.review_write_text.setGeometry(25, 60, 640, 50)
+        # self.review_write_text = 100
 
-    # # 리뷰 업로드
-    # def upload_review(self):
-    #     if self.score_combobox.currentText() == '별점 선택':
-    #         QMessageBox.warning(self, '별점 선택', '별점이 선택되지 않았습니다.')
-    #     else:
-    #         conn = sqlite3.connect("shop2.db", isolation_level=None)
-    #         c = conn.cursor()
-    #         c.execute(f'select 상호명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
-    #         restaurant_name = c.fetchone()[0]
-    #         c.execute(f'select 지점명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
-    #         restaurant_branch = c.fetchone()[0]
-    #         print(type(self.user_restaurant_info[1]))
-    #         print(self.user_restaurant_info[1])
-    #         print(type(self.user_restaurant_info[0]))
-    #         print(self.user_restaurant_info[0])
-    #         print(type(restaurant_name))
-    #         print(restaurant_name)
-    #         print(type(restaurant_branch))
-    #         print(restaurant_branch)
-    #         print(type(self.score_combobox.currentData()))
-    #         print(self.score_combobox.currentData())
-    #         print(type(self.review_write_text.toPlainText()))
-    #         print(self.review_write_text.toPlainText())
-    #         # if not restaurant_branch:
-    #         c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ({self.user_restaurant_info[1]}, {self.user_restaurant_info[0]}, {restaurant_name}, {self.score_combobox.currentData()}, {self.review_write_text.toPlainText()})')
-    #         # else:
-    #         #     c.execute(f'insert into 리뷰 ({self.user_restaurant_info[1]}, {self.user_restaurant_info[0]}, {restaurant_name}, {restaurant_branch}, {self.score_combobox.currentData()}, {self.review_write_text.toPlainText()})')
+    # 리뷰 업로드
+    def upload_review(self):
+        if self.score_combobox.currentText() == '별점 선택':
+            QMessageBox.warning(self, '별점 선택', '별점이 선택되지 않았습니다.')
+        else:
+            conn = sqlite3.connect("shop2.db", isolation_level=None)
+            c = conn.cursor()
+            c.execute(f'select 상호명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
+            restaurant_name = c.fetchone()[0]
+            c.execute(f'select 지점명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
+            restaurant_branch = c.fetchone()[0]
+            if not restaurant_branch:
+                c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
+            else:
+                c.execute(f'insert into 리뷰 ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", "{restaurant_branch}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
 
 
 if __name__ == '__main__':
