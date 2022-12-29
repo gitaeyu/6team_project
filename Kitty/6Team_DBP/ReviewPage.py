@@ -137,17 +137,21 @@ class ReviewPage(QWidget):
         if self.score_combobox.currentText() == '별점 선택':
             QMessageBox.warning(self, '별점 선택', '별점이 선택되지 않았습니다.')
         else:
-            conn = sqlite3.connect("shop2.db", isolation_level=None)
-            c = conn.cursor()
-            c.execute(f'select 상호명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
-            restaurant_name = c.fetchone()[0]
-            c.execute(f'select 지점명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
-            restaurant_branch = c.fetchone()[0]
-            if not restaurant_branch:
-                c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
+            upload = QMessageBox.question(self, '게시물 등록', '리뷰를 등록하시겠습니까?', QMessageBox.Yes | QMessageBox.No,
+                                 QMessageBox.No)
+            if upload == QMessageBox.Yes:
+                conn = sqlite3.connect("shop2.db", isolation_level=None)
+                c = conn.cursor()
+                c.execute(f'select 상호명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
+                restaurant_name = c.fetchone()[0]
+                c.execute(f'select 지점명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
+                restaurant_branch = c.fetchone()[0]
+                if not restaurant_branch:
+                    c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
+                else:
+                    c.execute(f'insert into 리뷰 ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", "{restaurant_branch}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
             else:
-                c.execute(f'insert into 리뷰 ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", "{restaurant_branch}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
-
+                pass
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
