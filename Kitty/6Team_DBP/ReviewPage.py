@@ -167,8 +167,3 @@ class ReviewPage(QWidget):
                 self.close()
             else:
                 pass
-#
-# if __name__ == '__main__':
-#     app = QApplication(sys.argv)
-#     ex = ReviewPage()
-#     sys.exit(app.exec_())
