@@ -34,7 +34,10 @@ class ReviewPage(QWidget):
     def set_button(self):
         self.return_button = QPushButton('돌아가기', self)
         self.return_button.setGeometry(700, 560, 80, 20)
-        self.return_button.clicked.connect(QCoreApplication.instance().quit)
+        self.return_button.clicked.connect(self.close_app)
+
+    def close_app(self):
+        self.close()
 
     # 리뷰 ui 세팅
     def review_ui(self):
@@ -70,7 +73,8 @@ class ReviewPage(QWidget):
 
         # 지점명이 있을 경우 지점명 더함
         if not self.save_review:
-            pass
+            self.nocoment_label = QLabel('평가가 없습니다.', self)
+            self.nocoment_label.setGeometry(350, 300, 100, 20)
         else:
             if self.save_review[0][3]:
                 self.restaurant_name_label = QLabel(f'{self.save_review[0][2]}{self.save_review[0][3]}'
@@ -79,8 +83,6 @@ class ReviewPage(QWidget):
                 self.restaurant_name_label = QLabel(f'{self.save_review[0][2]}({self.review_score}'
                                                     f' / 5) 유저리뷰', self)
             self.restaurant_name_label.setGeometry(100, 130, 300, 20)
-
-
 
     # 평점 계산기
     def score_calc(self, length):
@@ -91,7 +93,6 @@ class ReviewPage(QWidget):
             for i in range(length):
                 review_score += self.save_review[i][4]
             return review_score / length
-
 
     # 리뷰 뷰어?
     def review_viewer_ui(self):
@@ -133,19 +134,26 @@ class ReviewPage(QWidget):
     #     else:
     #         conn = sqlite3.connect("shop2.db", isolation_level=None)
     #         c = conn.cursor()
-    #         print(1)
     #         c.execute(f'select 상호명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
     #         restaurant_name = c.fetchone()[0]
     #         c.execute(f'select 지점명 from Gwangju where 상가업소번호={self.user_restaurant_info[1]}')
     #         restaurant_branch = c.fetchone()[0]
     #         print(type(self.user_restaurant_info[1]))
+    #         print(self.user_restaurant_info[1])
     #         print(type(self.user_restaurant_info[0]))
+    #         print(self.user_restaurant_info[0])
     #         print(type(restaurant_name))
+    #         print(restaurant_name)
     #         print(type(restaurant_branch))
+    #         print(restaurant_branch)
     #         print(type(self.score_combobox.currentData()))
-    #         print(type(self.review_write_text.))
-    #
-    #         c.execute(f'insert into 리뷰 ({self.user_restaurant_info[1]}, {self.user_restaurant_info[0]}, {restaurant_name}, {restaurant_branch}, {self.score_combobox.currentData()}, {self.review_write_text}')
+    #         print(self.score_combobox.currentData())
+    #         print(type(self.review_write_text.toPlainText()))
+    #         print(self.review_write_text.toPlainText())
+    #         # if not restaurant_branch:
+    #         c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ({self.user_restaurant_info[1]}, {self.user_restaurant_info[0]}, {restaurant_name}, {self.score_combobox.currentData()}, {self.review_write_text.toPlainText()})')
+    #         # else:
+    #         #     c.execute(f'insert into 리뷰 ({self.user_restaurant_info[1]}, {self.user_restaurant_info[0]}, {restaurant_name}, {restaurant_branch}, {self.score_combobox.currentData()}, {self.review_write_text.toPlainText()})')
 
 
 if __name__ == '__main__':
