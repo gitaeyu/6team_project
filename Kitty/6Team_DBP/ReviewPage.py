@@ -7,17 +7,14 @@ from PyQt5.QtGui import *
 # 리뷰 페이지 클래스
 class ReviewPage(QWidget):
 
-    def __init__(self):
+    def __init__(self, info):
         super().__init__()
         # 외부에서 받아올 유저, 레스토랑 정보[유저 id, 레스토랑 상가업소번호]
         # 리뷰 평점
         self.review_score = 0
         # 메인에서 받아올 유저와 식당 정보
-        self.user_restaurant_info = []
-        # 리뷰에 필요한 정보 저장용 리스트
+        self.user_restaurant_info = info
         self.save_review = []
-        # 임의의 값 입력 -------------------------------------------------------추후 삭제할 것
-        self.user_restaurant_info = ['selfishracer', '25195570']
 
         # ui 세팅
         self.set_ui()
@@ -69,6 +66,9 @@ class ReviewPage(QWidget):
         # 별을 평점에 맞게 잘라서 출력함
         self.review_score_label.setGeometry(25, 130, int(self.review_score * 12), 20)
 
+        # 6개까지만 출력함
+        if ui_length > 6:
+            ui_length = 6
         # self.i값에 받아 반복에 사용
         for self.i in range(ui_length):
             # 리뷰 뷰어 실행
@@ -141,7 +141,6 @@ class ReviewPage(QWidget):
         # 평가용 textedit
         self.review_write_text = QTextEdit('', self)
         self.review_write_text.setGeometry(25, 60, 640, 50)
-        # self.review_write_text = 100
 
     # 리뷰 업로드
     def upload_review(self):
@@ -165,14 +164,14 @@ class ReviewPage(QWidget):
                 if not restaurant_branch:
                     c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
                 else:
-                    c.execute(f'insert into 리뷰 ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", "{restaurant_branch}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
+                    c.execute(f'insert into 리뷰 (상가업소번호, ID, 상호명, 지점명, 평점, 리뷰) values ("{self.user_restaurant_info[1]}", "{self.user_restaurant_info[0]}", "{restaurant_name}", "{restaurant_branch}", {self.score_combobox.currentData()}, "{self.review_write_text.toPlainText()}")')
                 # 리뷰 등록 완료
                 QMessageBox.information(self, '리뷰 등록', '리뷰가 등록되었습니다.')
                 self.close()
             else:
                 pass
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = ReviewPage()
-    sys.exit(app.exec_())
+#
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     ex = ReviewPage()
+#     sys.exit(app.exec_())
