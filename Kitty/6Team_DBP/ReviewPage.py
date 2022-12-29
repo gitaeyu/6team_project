@@ -40,6 +40,10 @@ class ReviewPage(QWidget):
         # 리뷰 데이터 로드하기
         conn = sqlite3.connect("shop2.db", isolation_level=None)
         c = conn.cursor()
+        # 리뷰 테이블이 없을 경우 테이블 작성
+        c.execute('create table if not exists 리뷰 \
+                  (상가업소번호 text not null, ID text not null, 상호명 text not null, 지점명 text,'
+                  ' 평점 int not null, 리뷰 text);')
         c.execute(f'select * from 리뷰 where 상가업소번호={self.user_restaurant_info[1]}')
         # save review 변수에 받아온 식당 상가업소번호에 해당하는 모든 리뷰 정보를 저장
         self.save_review = c.fetchall()
@@ -94,8 +98,6 @@ class ReviewPage(QWidget):
 
         self.review_write_text = QTextEdit('', self)
         self.review_write_text.setGeometry(25, 530, 640, 50)
-
-
 
 
 if __name__ == '__main__':
